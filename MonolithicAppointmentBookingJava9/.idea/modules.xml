@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/appointmentBookingJava9.iml" filepath="$PROJECT_DIR$/appointmentBookingJava9.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MonolithicAppointmentBookingJava9.iml" filepath="$PROJECT_DIR$/MonolithicAppointmentBookingJava9.iml" />
     </modules>
   </component>
 </project>

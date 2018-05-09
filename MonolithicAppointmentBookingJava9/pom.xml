@@ -57,7 +57,10 @@
 		<!-- target Java 9 -->
 		<plugin>
 				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>			
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				 <configuration>
+                        <release>9</release>
+                    </configuration>			
 		</plugin>
 	</plugins>
 </build>

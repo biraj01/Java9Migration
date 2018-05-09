@@ -1,7 +1,9 @@
 package com.biraj.appointmentBookingJava9;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import com.biraj.appointmentBookingJava9.model.AppointmentBean;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -35,7 +37,21 @@ public class AppointmentBookingJava9Application {
 	            counselor2.setLastName("Zukunft");
 	            counselor2.setOpenFrom(LocalTime.of(12, 00));
 	            counselor2.setOpenTill(LocalTime.of(18, 00));
-	            counselor2 = coun.save(counselor2);  	        
+	            counselor2 = coun.save(counselor2);  
+	            
+	            CounselorBean counselor3 = new CounselorBean();
+	            counselor3.setFirstName("Brend");
+	            counselor3.setLastName("Kahlbrandt");
+	            counselor3.setOpenFrom(LocalTime.of(12, 00));
+	            counselor3.setOpenTill(LocalTime.of(18, 00));
+	            coun.save(counselor3);
+
+				AppointmentBean bean = new AppointmentBean();
+				bean.setCounselorBean(counselor3);
+				bean.setStudentBean(student1);
+				bean.setFrom(LocalDateTime.now());
+				bean.setTo(LocalDateTime.now().plusHours(1));
+				app.save(bean);
 	            
 	        };
 	    }
