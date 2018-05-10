@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/appointmentService/appointmentService.iml" filepath="$PROJECT_DIR$/appointmentService/appointmentService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dataaccess/dataaccess.iml" filepath="$PROJECT_DIR$/dataaccess/dataaccess.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mainmodule/mainmodule.iml" filepath="$PROJECT_DIR$/mainmodule/mainmodule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modularAppointmentBooking.iml" filepath="$PROJECT_DIR$/modularAppointmentBooking.iml" />
+    </modules>
+  </component>
+</project>
