@@ -2,6 +2,7 @@ package com.appointmentService.impl;
 
 import java.time.DateTimeException;
 import java.util.List;
+import java.util.ServiceLoader;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,9 +12,10 @@ import com.appointmentService.helper.AppointmentParameter;
 import com.dataaccess.entities.AppointmentBean;
 import com.dataaccess.entities.CounselorBean;
 import com.dataaccess.entities.StudentBean;
-import com.dataaccess.repository.AppointmentRepository;
-import com.dataaccess.repository.CounselorRepository;
-import com.dataaccess.repository.StudentRepository;
+import com.dataaccess.repository.api.AppointmentRepository;
+import com.dataaccess.repository.api.CounselorRepository;
+import com.dataaccess.repository.api.StudentRepository;
+
 
 @Service(value = "appointmentService")
 public class AppointmentServiceImpl implements AppointmentService {
@@ -23,7 +25,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 	@Autowired
 	private CounselorRepository counselorRepository;
-	
+
 	@Autowired
 	private AppointmentRepository appointmentRepository;
 
@@ -31,7 +33,9 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 	@Override
 	public void deleteAppointment(int appointmentId, int studentId) {
-	AppointmentBean bean = appointmentRepository.findById(appointmentId).get();
+		System.out.println("in delete appointment");
+	AppointmentBean bean = appointmentRepository.findById(appointmentId);
+	System.out.println(bean + "must be null");
 		if (bean.getStudentBean().getMatrikerNr() == studentId) {
 			appointmentRepository.deleteById(appointmentId);
 		} else {
@@ -43,11 +47,11 @@ public class AppointmentServiceImpl implements AppointmentService {
 	@Override
 	public AppointmentBean updateAppointment(int appointmentId, AppointmentParameter bean) throws Exception {
 		validateParam(bean);
-		AppointmentBean beanFormDB = appointmentRepository.findById(appointmentId).get();
+		AppointmentBean beanFormDB = appointmentRepository.findById(appointmentId);
 		if (beanFormDB == null) {
 			throw new Exception("Appointment with appointmentId" + appointmentId + "not found");
 		}
-		CounselorBean counselorBean = counselorRepository.findById(bean.getCounselorId()).get();
+		CounselorBean counselorBean = counselorRepository.findById(bean.getCounselorId());
 		if (bean.getFrom().getHour() < counselorBean.getOpenFrom().getHour()) {
 			// Throw closed hour exception
 			throw new DateTimeException("Counselor office is closed");
@@ -71,8 +75,8 @@ public class AppointmentServiceImpl implements AppointmentService {
 		bean.setFrom(param.getFrom());
 		bean.setTo(param.getTo());
 
-		StudentBean studentBean = studentRepository.findById(param.getStudentId()).get();
-		CounselorBean counselorBean = counselorRepository.findById(param.getCounselorId()).get();
+		StudentBean studentBean = studentRepository.findById(param.getStudentId());
+		CounselorBean counselorBean = counselorRepository.findById(param.getCounselorId());
 		if (studentBean == null) {
 			throw new Exception("student with studentId" + param.getStudentId() + " is not found"); 
 		}

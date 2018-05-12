@@ -3,29 +3,28 @@ package com.main;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import com.dataaccess.repository.AppointmentRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScans;
 
 import com.dataaccess.entities.AppointmentBean;
 import com.dataaccess.entities.CounselorBean;
 import com.dataaccess.entities.StudentBean;
-import com.dataaccess.repository.CounselorRepository;
-import com.dataaccess.repository.StudentRepository;
+import com.dataaccess.repository.api.AppointmentRepository;
+import com.dataaccess.repository.api.CounselorRepository;
+import com.dataaccess.repository.api.StudentRepository;
 
 
-@SpringBootApplication(scanBasePackages={
-"com.appointmentService.api"})
-
+@SpringBootApplication(scanBasePackageClasses={com.appointmentService.api.AppointmentService.class, com.dataaccess.repository.api.StudentRepository.class})
+@ComponentScan({"com"})
+@EntityScan( basePackages = {"com.dataaccess.entities"})
 public class AppointmentBookingJava9Application {
 
-	@Autowired
-	private StudentRepository studentRepository;
 	 @Bean
 	    CommandLineRunner init(StudentRepository studentRepository, CounselorRepository coun, AppointmentRepository app) {
 	        return args -> {

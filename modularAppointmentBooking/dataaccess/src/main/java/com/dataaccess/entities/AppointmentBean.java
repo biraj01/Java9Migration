@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.springframework.stereotype.Service;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -20,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 	    @UniqueConstraint(columnNames = {"student_id", "BEGIN"}),
 	    @UniqueConstraint(columnNames={"counselor_id", "BEGIN"})
 }) 
+@Service
 public class AppointmentBean {
 
 	@Id
