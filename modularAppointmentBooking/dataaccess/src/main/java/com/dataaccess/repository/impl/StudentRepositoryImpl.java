@@ -20,14 +20,13 @@ public class StudentRepositoryImpl implements StudentRepository {
 	
 	@Override
 	public StudentBean findById(int studentId) {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.find(StudentBean.class, studentId);
 	}
 
 	@Override
 	public StudentBean save(StudentBean student1) {
-		entityManager.persist(student1);
-		return null;
+		 entityManager.persist(student1);
+		 return student1;
 	}
 
 }

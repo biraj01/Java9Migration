@@ -20,38 +20,38 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
 	
 	@Override
 	public List<AppointmentBean> findAllAppointmentsByCounselorBean_CounselorId(int counselorId) {
-	//	EntityManager entityManager = entityManagerFactory.createEntityManager();
-
-//	    TypedQuery<AppointmentBean> query = entityManager.createQuery("SELECT book from BookEntity book where book.id = :id", AppointmentBean.class);
-//	    query.setParameter("id", counselorId);
-//	    return query.getSingleResult();
-	    return null;
+		List<AppointmentBean> appointmentList =  
+		entityManager.createQuery("from AppointmentBean c WHERE c.counselorBean.counselor_id LIKE :id")
+	    .setParameter("id", counselorId)
+	    .getResultList();
+	    return appointmentList ;
 	}
 
 	@Override
-	public List<AppointmentBean> findAllAppointmentsByStudentBean_StudentId(int counselorId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<AppointmentBean> findAllAppointmentsByStudentBean_StudentId(int studentId) {
+		List<AppointmentBean> appointmentList =  
+				entityManager.createQuery("from AppointmentBean c WHERE c.studentBean.studentId LIKE :id")
+			    .setParameter("id", studentId)
+			    .getResultList();
+			    return appointmentList ;
 	}
 
 	@Override
 	public AppointmentBean findById(int appointmentId) {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.find(AppointmentBean.class, appointmentId);
 	}
 
 	@Override
 	public void deleteById(int appointmentId) {
-		// TODO Auto-generated method stub
+		AppointmentBean bean = entityManager.find(AppointmentBean.class, appointmentId);
+		entityManager.detach(bean);
 
 	}
 
 	@Override
-	public AppointmentBean save(AppointmentBean beanFormDB) {
-		System.out.println(entityManager + "isNUll?" );
-		entityManager.persist(beanFormDB);
-
-		return null;
+	public AppointmentBean save(AppointmentBean bean) {
+		entityManager.persist(bean);
+		return bean;
 	}
 
 }

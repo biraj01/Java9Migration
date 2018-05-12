@@ -20,14 +20,13 @@ public class CounselorRepositoryImpl implements CounselorRepository {
 	
 	@Override
 	public CounselorBean findById(int counselorId) {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.find(CounselorBean.class, counselorId);
 	}
 
 	@Override
 	public CounselorBean save(CounselorBean counselor) {
 		entityManager.persist(counselor);
-		return null;
+		return counselor;
 	}
 
 }
