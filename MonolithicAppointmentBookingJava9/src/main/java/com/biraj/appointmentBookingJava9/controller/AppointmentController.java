@@ -21,11 +21,9 @@ import com.biraj.appointmentBookingJava9.helper.AppointmentParameter;
 import com.biraj.appointmentBookingJava9.helper.AppointmentUrl;
 import com.biraj.appointmentBookingJava9.model.AppointmentBean;
 
-
-
 @RestController
 public class AppointmentController {
-	
+
 	@Autowired
 	private AppointmentService appointmentService;
 
@@ -33,10 +31,10 @@ public class AppointmentController {
 	 * Erzeugt eine neue Beratungtermin
 	 */
 	@RequestMapping(value = AppointmentUrl.createAppointment, method = RequestMethod.POST)
-	public ResponseEntity<?> createAppointment(@PathVariable String studentId, @RequestBody AppointmentParameter appointParam,
-			BindingResult binding) {
-		if(binding.hasErrors()){
-			return new ResponseEntity<String>("Parameter binding Error",HttpStatus.NOT_ACCEPTABLE);
+	public ResponseEntity<?> createAppointment(@PathVariable String studentId,
+			@RequestBody AppointmentParameter appointParam, BindingResult binding) {
+		if (binding.hasErrors()) {
+			return new ResponseEntity<String>("Parameter binding Error", HttpStatus.NOT_ACCEPTABLE);
 		}
 		try {
 			AppointmentBean bean = appointmentService.createAppointment(appointParam);
@@ -55,7 +53,7 @@ public class AppointmentController {
 	@RequestMapping(value = AppointmentUrl.deleteAppointment, method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteAppointment(@PathVariable int appointmentId, @PathVariable int studentId) {
-		appointmentService.deleteAppointment(appointmentId,studentId );
+		appointmentService.deleteAppointment(appointmentId, studentId);
 	}
 
 	/**
@@ -66,9 +64,10 @@ public class AppointmentController {
 	 * @return AppointmentBean
 	 */
 	@RequestMapping(value = AppointmentUrl.updateAppoitnment, method = RequestMethod.PUT)
-	public ResponseEntity<?> updateAppointment(@PathVariable int counselorId, @PathVariable int appointmentId,@RequestBody AppointmentParameter param) {
+	public ResponseEntity<?> updateAppointment(@PathVariable int counselorId, @PathVariable int appointmentId,
+			@RequestBody AppointmentParameter param) {
 		try {
-			AppointmentBean bean = appointmentService.updateAppointment(appointmentId,param);
+			AppointmentBean bean = appointmentService.updateAppointment(appointmentId, param);
 			return new ResponseEntity<AppointmentBean>(bean, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
@@ -84,14 +83,10 @@ public class AppointmentController {
 	public List<AppointmentBean> listAppointments(@PathVariable int counselorId) {
 		return appointmentService.getallAppointments(counselorId);
 	}
-	
-	
-	
+
 	@RequestMapping(value = "date", method = RequestMethod.GET)
 	public LocalDateTime testDate() {
-		return  LocalDateTime.now();
+		return LocalDateTime.now();
 	}
-	
-	
 
 }

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.appointmentService.api.AppointmentService;
 import com.appointmentService.helper.AppointmentParameter;
-import com.appointmentService.impl.AppointmentServiceImpl;
 import com.dataaccess.entities.AppointmentBean;
 
 

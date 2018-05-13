@@ -17,7 +17,7 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
 	@PersistenceContext	
 	private EntityManager entityManager;	
 
-	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<AppointmentBean> findAllAppointmentsByCounselorBean_CounselorId(int counselorId) {
 		List<AppointmentBean> appointmentList =  
@@ -27,6 +27,7 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
 	    return appointmentList ;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<AppointmentBean> findAllAppointmentsByStudentBean_StudentId(int studentId) {
 		List<AppointmentBean> appointmentList =  
